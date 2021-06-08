@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>div content</title>
+    <style>
+        #info {
+            border: 1px solid red;
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="info" contenteditable="true" oninput="record()">123</div>
+    
+    <script>
+        function record(){
+            localStorage.setItem('mytest',info.innerText);
+        }
+        if(localStorage.getItem('mytest'))
+        info.innerText = localStorage.getItem('mytest');
+
+    </script>
+</body>
+</html>

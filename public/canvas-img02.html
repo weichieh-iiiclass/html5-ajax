@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #mycanvas {
+            border: 1px solid rebeccapurple;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="mycanvas" width="600" height="400"></canvas>
+    <button onclick="myfile.click()">load image</button>
+    <br>
+    <input type="file" id="myfile" accept="image/*" style="display: none;"> 
+    
+
+    <script>
+        // canvas點陣資料，最小單位px
+        const myc = document.querySelector('#mycanvas');
+        const myfile = document.querySelector('#myfile');
+        const ctx = myc.getContext('2d');
+        
+        const img = new Image(); //是在記憶體裡面不在DOM，要呈現必須放在DOM裡
+        const reader = new FileReader(); //檔案的載入器
+
+        img.addEventListener('load', ()=>{ //呈現出來之後才能畫在版面上
+            ctx.drawImage(img, 0, 0);
+        });
+        reader.addEventListener('load', ()=> {
+            img.src = reader.result;
+        });
+        myfile.addEventListener('change', ()=>{
+            reader.readAsDataURL(myfile.files[0]);
+        });
+        
+
+    </script>
+</body>
+</html>

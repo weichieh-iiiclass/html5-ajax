@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #mycanvas {
+            border: 1px solid rebeccapurple;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="mycanvas" width="600" height="400"></canvas>
+    <button onclick="draw()">draw image</button>
+    <br>
+    <img id="myImg" src="./images/bunny-poster.png" alt="">
+
+    <script>
+        // canvas點陣資料，最小單位px
+        const myc = document.querySelector('#mycanvas');
+        const ctx = myc.getContext('2d');
+
+        function draw(){
+            ctx.drawImage(myImg, 0, 0, myImg.width/2, myImg.height/2);
+            console.log(myc.toDataURL()); //體積會膨脹
+        }
+
+    </script>
+</body>
+</html>
