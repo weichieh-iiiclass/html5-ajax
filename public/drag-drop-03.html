@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .rect {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            border: 1px solid black;
+            margin: 10px;
+            display: flex;
+            background-color: cornflowerblue;
+            
+        }
+        .ball {
+            width: 60px;
+            height: 60px;
+            background-color: pink;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div class="rect">
+        <div id="b1" class="ball" draggable="true">1</div>
+        <div id="b2" class="ball" draggable="true">2</div>
+        <div id="b3" class="ball" draggable="true">3</div>
+    </div>
+
+    <div class="rect"></div>
+
+    <script src="./javascripts/jquery-3.4.1.js"></script> 
+    <script>
+        // 此做法有風險
+        let dragTarget = null; //存放拖拉對象
+        const rects = $('.rect');
+        const balls = $('.ball');
+        
+        balls.on('dragstart', function(event){
+            dragTarget = $(event.target);
+        });
+        balls.on('dragend', function(event){
+            dragTarget = null;
+        });
+        rects.on('dragover', function(event){
+            event.preventDefault(); //為了偵聽到下面的drop
+        });
+
+        rects.on('dragenter', function(event){
+            $(this).css('background-color', 'yellow');
+        });
+        rects.on('dragleave', function(event){
+            $(this).css('background-color', 'cornflowerblue');
+        });
+
+        rects.on('drop', function(event){
+            if(dragTarget){
+                $(event.target).append( dragTarget); //因為id只有一個所以才會從原本的box移動過去
+            }
+            $(this).css('background-color', 'cornflowerblue');
+        });
+
+    </script>
+</body>
+</html>

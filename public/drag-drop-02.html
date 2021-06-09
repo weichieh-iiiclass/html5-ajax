@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .rect {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            border: 1px solid black;
+            margin: 10px;
+            display: flex;
+            
+        }
+        .ball {
+            width: 60px;
+            height: 60px;
+            background-color: pink;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div class="rect" style="background-color: cornflowerblue;">
+        <div id="b1" class="ball" draggable="true">1</div>
+        <div id="b2" class="ball" draggable="true">2</div>
+        <div id="b3" class="ball" draggable="true">3</div>
+    </div>
+
+    <div class="rect" style="background-color: darksalmon;">
+    </div>
+
+    <script src="./javascripts/jquery-3.4.1.js"></script> 
+    <script>
+        const rects = $('.rect');
+        const balls = $('.ball');
+        
+        balls.on('dragstart', function(event){
+            console.log(event.target.id);
+            event.originalEvent.dataTransfer.setData('text', event.target.id);
+        });
+        rects.on('dragover', function(event){
+            event.preventDefault(); //為了偵聽到下面的drop
+        });
+        rects.on('drop', function(event){
+            const objId = event.originalEvent.dataTransfer.getData('text');
+            console.log('drop:', event.target);
+            console.log('data:', objId);
+
+            $(event.target).append( $('#'+ objId)); //因為id只有一個所以才會從原本的box移動過去
+            
+        });
+
+    </script>
+</body>
+</html>

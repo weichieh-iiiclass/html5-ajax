@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .rect {
+            position: relative;
+            width: 400px;
+            height: 300px;
+            border: 1px solid black;
+            margin: 10px;
+            display: flex;
+            background-color: cornflowerblue;
+            
+        }
+        .ball {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 60px;
+            
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="rect">
+        <div id="b1" class="ball" draggable="true" style="background-color:gold">1</div>
+        <div id="b2" class="ball" draggable="true" style="background-color:rgb(146, 233, 193); left: 60px;">2</div>
+        <div id="b3" class="ball" draggable="true" style="background-color:rgb(245, 181, 109); left: 120px;">3</div>
+    </div>
+
+    
+
+    <script src="./javascripts/jquery-3.4.1.js"></script> 
+    <script>
+        const rect = $('.rect');
+        const balls = $('.ball');
+
+        let dragTarget = null;
+
+        const mDown = function(event){
+            rect.on('mousemove', mMove);
+            dragTarget = $(this);
+        };
+        const mUp = function(event){
+            rect.off('mousemove', mMove);
+            dragTarget = null;
+        };
+        const mMove = function(event){
+            if(dragTarget){
+                dragTarget.css({
+                   left: event.pageX-30,
+                   top: event.pageY-30. 
+                });
+            }
+        };
+        balls.on('mousedown', mDown);
+        $(window).on('mouseup', mUp);
+    </script>
+</body>
+</html>
