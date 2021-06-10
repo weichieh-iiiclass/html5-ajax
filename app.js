@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const serveIndex = require('serve-index');
+const axios = require('axios'); //前(=ajax jQuery API)後端均可使用
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -38,6 +39,13 @@ app.get('/try-sse',(req, res)=>{
     res.write(`id: ${now.toLocaleString()}\n\n`);
     id ++;
     }, 2000);
+});
+
+app.get('/yahoo', (req, res)=>{
+  axios.get('https://tw.yahoo.com')
+      .then(response =>{
+        res.send(response.data);
+      });
 });
 
 // catch 404 and forward to error handler

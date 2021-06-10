@@ -47,7 +47,7 @@
                     if(socket && socket.readyState===WebSocket.OPEN){
                         return;
                     }
-                    socket = new WebSocket('wss://echo.websocket.org');
+                    socket = new WebSocket('ws://localhost:3000');
                     socket.addEventListener('open', myOpen);
                     socket.addEventListener('message', myMessage);
                     socket.addEventListener('close', myClose);
