@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        const ar1 = [2,56,19,37,76,34,21];
+        
+        ar1.sort(); //按照文字去排
+        ar1.sort((a,b)=>{ //會按照數值小到大排序
+            console.log(a,b,a-b);
+            return a-b; //數值回傳如果小於0就兩者對調
+        });
+        ar1.sort((a,b)=> b-a); //會按照數值大到小排序
+        // console.log的地雷，如果要看陣列跟物件的排序，它會跟當前的(最後的)物件,陣列做連動，可能會造成誤會
+        // 所以最好轉成字串印出JSON.stringify(ar1)
+
+        const ar2 = [
+            {name: 'bill', age:25},
+            {name: 'bill', age:28},
+            {name: 'bill', age:26},
+        ];
+
+        ar2.sort((a,b)=>{ 
+            // return a.name < b.name ; //有誤，因為回傳會是1,0所以沒有小於0的，不會兩者對調
+            return a.name < b.name ? 1: -1 ; //寫成三元運算子，0指定-1即可      
+        });
+        ar2.sort((a,b)=>{ 
+            return a.age - b.age; //寫成三元運算子，0指定-1即可      
+        });
+
+
+    </script>
+</body>
+</html>

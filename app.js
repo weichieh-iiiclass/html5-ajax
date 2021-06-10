@@ -24,6 +24,22 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', serveIndex('public', {'icons': true}));
 app.use('/users', usersRouter);
 
+app.get('/try-sse',(req, res)=>{
+  let id = 30;
+  res.writeHead(200, {
+    'Content-Type': 'text/event-stream; charset=utf-8',
+    'Cache-Control': 'no-cache',
+    'Connection': 'keep-alive',
+  });
+  setInterval(function () { 
+    //不能用res.end或res.send，因為用了就代表結束連線，會中斷連線
+    let now = new Date();
+    res.write(`id: ${id}\n`);
+    res.write(`id: ${now.toLocaleString()}\n\n`);
+    id ++;
+    }, 2000);
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
